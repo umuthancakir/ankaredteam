@@ -1,107 +1,59 @@
-// === app.js ===
-// (Place this file at your project root, unchanged from what you provided)
-
-const express = require('express')
-const path = require('path')
-
-const port = process.env.PORT || 5006
-
-const app = express()
-
-app.use(express.static(path.join(__dirname, 'public')))
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'ejs')
-
-app.get('/', (req, res) => {
-  console.log(`Rendering 'pages/index' for route '/'`)
-  res.render('pages/index')
-})
-
-const server = app.listen(port, () => {
-  console.log(`Listening on ${port}`)
-})
-
-// The number of seconds an idle Keep-Alive connection is kept open. This should be greater than the Heroku Router's
-// Keep-Alive idle timeout of 90 seconds:
-// - to ensure that the closing of idle connections is always initiated by the router and not the Node.js server
-// - to prevent a race condition if the router sends a request to the app just as Node.js is closing the connection
-// https://devcenter.heroku.com/articles/http-routing#keepalives
-// https://nodejs.org/api/http.html#serverkeepalivetimeout
-server.keepAliveTimeout = 95 * 1000
-
-process.on('SIGTERM', async () => {
-  console.log('SIGTERM signal received: gracefully shutting down')
-  if (server) {
-    server.close(() => {
-      console.log('HTTP server closed')
-    })
-  }
-})
-
-
-// === views/pages/index.ejs ===
-// (Place this file at views/pages/index.ejs)
-
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hacked By TurkHackTeam | Anka Red Team</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Iceland">
-  <style>
-    body { background-color: #000; margin: 0; padding: 0; color: #fff; }
-    .center { text-align: center; }
-    .banner { padding: 20px; }
-    footer { margin-top: 20px; font-family: 'Iceland', sans-serif; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hacked By TurkHackTeam | Anka Red Team</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Iceland">
+<style>
+body { background-color: #000; margin: 0; padding: 0; color: #fff; }
+.center { text-align: center; }
+.banner { padding: 20px; }
+footer { margin-top: 20px; font-family: 'Iceland', sans-serif; }
+</style>
 </head>
 <body onclick="playAudio();">
-  <div class="center">
-    <div class="banner">
-      <img src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/m9RCVr.png" alt="resim" />
-    </div>
+<div class="center">
+<div class="banner">
+<img src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/m9RCVr.png" alt="resim" />
+</div>
 
-    <p>
-      <img src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/jj1jmD.gif" width="300" height="23" style="margin-left:0px;" />
-    </p>
+<p>
+<img src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/jj1jmD.gif" width="300" height="23" style="margin-left:0px;" />
+</p>
 
-    <h1 style="font-family: 'Iceland', serif; font-size: 3rem; color: #fff; margin: .2rem 0;">Hacked By;</h1>
-    <h2 style="font-family: 'Iceland', serif; font-size: 3rem; color: red; margin: .2rem 0;"><b> KRYZLO</b></h2>
+<h1 style="font-family: 'Iceland', serif; font-size: 2.5rem; color: #fff; margin: .2rem 0;">Hacked by @By_pulsar, @ArchieNNN, @rC4K1R</h1>
 
-    <p>
-      <img src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/jj1jmD.gif" width="300" height="23" style="margin-left:0px;" />
-    </p>
+<p>
+<img src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/jj1jmD.gif" width="300" height="23" style="margin-left:0px;" />
+</p>
 
-    <p style="font-family: 'Iceland', serif; font-size: 1.25rem; color: #fff;">
-      Istedigimiz Zaman, Istedigimiz Yerde.!
-    </p>
+<p style="font-family: 'Iceland', serif; font-size: 1.25rem; color: #fff;">
+Istedigimiz Zaman, Istedigimiz Yerde.!
+</p>
 
-    <p>
-      <a style="text-decoration:none;" target="_blank" href="https://turkhackteam.org/" rel="noopener noreferrer">
-        <span style="font-family: 'Iceland', serif; font-size: 1.25rem; color: red;">[ Turkhackteam.org ]</span>
-      </a>
-    </p>
+<p>
+<a style="text-decoration:none;" target="_blank" href="https://turkhackteam.org/" rel="noopener noreferrer">
+<span style="font-family: 'Iceland', serif; font-size: 1.25rem; color: red;">[ Turkhackteam.org ]</span>
+</a>
+</p>
 
-    <!-- Audio (plays when the user clicks anywhere on the page) -->
-    <audio id="sec">
-      <source src="https://cdn.discordapp.com/attachments/1025874740847575164/1025875083190874212/mt-hani-gokboru-beat.mp3" type="audio/mpeg">
-      Your browser does not support the audio element.
-    </audio>
+<!-- Audio (plays when the user clicks anywhere on the page) -->
+<audio id="sec">
+<source src="https://cdn.discordapp.com/attachments/1025874740847575164/1025875083190874212/mt-hani-gokboru-beat.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
 
-    <script>
-      var x = document.getElementById("sec");
-      function playAudio() {
-        if (x && x.paused) {
-          x.play().catch(function(e) { console.warn('Autoplay prevented:', e); });
-        }
-      }
-    </script>
+<script>
+var x = document.getElementById("sec");
+function playAudio() {
+if (x && x.paused) {
+x.play().catch(function(e) { console.warn('Autoplay prevented:', e); });
+}
+}
+</script>
 
-    <!-- Added handles as requested -->
-    <footer class="center">
-      <p style="font-family: 'Iceland', serif; color: #fff; font-size: 1rem;">@By_pulsar, @ArchieNNN, @rC4K1R</p>
-    </footer>
-  </div>
+<!-- Footer removed as requested (handles moved into the main heading) -->
+</div>
 </body>
 </html>
