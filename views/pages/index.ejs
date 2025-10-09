@@ -1,60 +1,136 @@
+<%-- views/hacked.ejs --%>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hacked By TurkHackTeam | Anka Red Team</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Iceland">
-<style>
-body { background-color: #000; margin: 0; padding: 0; color: #fff; }
-.center { text-align: center; }
-.banner { padding: 20px; }
-footer { margin-top: 20px; font-family: 'Iceland', sans-serif; }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><%= title || 'Hacked Simulation - Anka Red Team' %></title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #000000;
+      --neon-red: #ff0033;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      font-family: 'Orbitron', sans-serif;
+      overflow: hidden;
+    }
+
+    #matrix-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      display: block;
+      opacity: 0.35;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 2;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--neon-red);
+    }
+
+    .logo {
+      width: 260px;
+      height: 260px;
+      background-image: url('https://i.hizliresim.com/8cndvl5.png');
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      filter: drop-shadow(0 0 25px #ff0033);
+      animation: pulse 3s infinite ease-in-out;
+      margin-bottom: 1.5rem;
+    }
+
+    .neon-title {
+      font-weight: 900;
+      font-size: clamp(28px, 4vw, 60px);
+      text-transform: uppercase;
+      color: var(--neon-red);
+      text-shadow: 0 0 7px #ff0033, 0 0 14px #ff0033, 0 0 28px #ff0033, 0 0 56px #ff0033;
+      animation: flicker 2.5s infinite;
+      margin-bottom: 0.6rem;
+    }
+
+    .sub {
+      font-weight: 700;
+      font-size: clamp(16px, 1.8vw, 24px);
+      color: var(--neon-red);
+      text-shadow: 0 0 6px #ff0033, 0 0 18px #ff0033, 0 0 36px #ff0033;
+      animation: flicker 3s infinite;
+    }
+
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.5; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { filter: drop-shadow(0 0 10px #ff0033); }
+      50% { filter: drop-shadow(0 0 30px #ff3366); }
+    }
+  </style>
 </head>
-<body onclick="playAudio();">
-<div class="center">
-<div class="banner">
-<img src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/m9RCVr.png" alt="resim" />
-</div>
+<body>
+  <canvas id="matrix-canvas"></canvas>
 
-<p>
-<img src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/jj1jmD.gif" width="300" height="23" style="margin-left:0px;" />
-</p>
+  <main class="wrap">
+    <div class="logo"></div>
+    <h1 class="neon-title">HEY ADMIN YOUR SYSTEM HAS BEEN HACKED</h1>
+    <div class="sub">Anka Red Team Proudly Presents</div>
+  </main>
 
-<h1 style="font-family: 'Iceland', serif; font-size: 2.5rem; color: #fff; margin: .2rem 0;">Hacked by</h1>
-<h2 style="font-family: 'Iceland', serif; font-size: 2.5rem; color: red; margin: .2rem 0;"><b>By_pulsar, ArchieNNN, C4K1R, Kryzlo</b></h2>
+  <script>
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
 
-<p>
-<img src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/jj1jmD.gif" width="300" height="23" style="margin-left:0px;" />
-</p>
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
 
-<p style="font-family: 'Iceland', serif; font-size: 1.25rem; color: #fff;">
-Istedigimiz Zaman, Istedigimiz Yerde.!
-</p>
+    const fontSize = 18;
+    const columns = Math.floor(width / fontSize);
 
-<p>
-<a style="text-decoration:none;" target="_blank" href="https://turkhackteam.org/" rel="noopener noreferrer">
-<span style="font-family: 'Iceland', serif; font-size: 1.25rem; color: red;">[ Turkhackteam.org ]</span>
-</a>
-</p>
+    const drops = Array.from({length: columns}, () => Math.floor(Math.random() * height / fontSize));
 
-<!-- Audio (plays when the user clicks anywhere on the page) -->
-<audio id="sec">
-<source src="https://cdn.discordapp.com/attachments/1025874740847575164/1025875083190874212/mt-hani-gokboru-beat.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 
-<script>
-var x = document.getElementById("sec");
-function playAudio() {
-if (x && x.paused) {
-x.play().catch(function(e) { console.warn('Autoplay prevented:', e); });
-}
-}
-</script>
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, width, height);
 
-<!-- Footer removed as requested (handles moved into the main heading) -->
-</div>
+      ctx.fillStyle = 'rgba(255, 0, 51, 1)';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        drops[i] = (drops[i] * fontSize > height && Math.random() > 0.975) ? 0 : drops[i] + 1;
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    draw();
+  </script>
 </body>
 </html>
