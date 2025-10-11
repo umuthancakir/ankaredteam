@@ -1,60 +1,190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Hacked By TurkHackTeam | Anka Red Team</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Iceland">
 <style>
-body { background-color: #000; margin: 0; padding: 0; color: #fff; }
-.center { text-align: center; }
-.banner { padding: 20px; }
-footer { margin-top: 20px; font-family: 'Iceland', sans-serif; }
+  :root{
+    --bg:#000;
+    --red:#ff1a1a;
+    --glow: rgba(255,20,20,0.95);
+    --text-shadow-1: 0 0 6px rgba(255,20,20,0.9);
+    --text-shadow-2: 0 0 18px rgba(255,30,30,0.7);
+    --text-shadow-3: 0 0 36px rgba(255,50,50,0.45);
+  }
+  html,body{
+    height:100%;
+    margin:0;
+    background: radial-gradient(ellipse at center, #050505 0%, #000000 60%);
+    color:#fff;
+    font-family: 'Iceland', sans-serif;
+    overflow-x:hidden;
+  }
+  .wrap {
+    min-height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    padding:40px 20px;
+    box-sizing:border-box;
+  }
+  .logo-wrap{
+    position:relative;
+    display:inline-block;
+    padding:18px;
+    border-radius:18px;
+    margin-bottom:12px;
+    transition: filter .25s ease, transform .25s ease;
+  }
+  .logo-wrap::before{
+    content:"";
+    position:absolute;
+    left:-8px; right:-8px; top:-8px; bottom:-8px;
+    border-radius:22px;
+    pointer-events:none;
+    z-index:-1;
+    box-shadow:
+      0 0 12px rgba(255,0,0,0.9),
+      0 0 30px rgba(255,20,20,0.6),
+      0 0 60px rgba(255,40,40,0.35);
+    filter: blur(2px);
+  }
+  .logo {
+    display:block;
+    width:420px;
+    max-width:82vw;
+    height:auto;
+    border-radius:6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    transition: transform .25s ease, filter .25s ease, opacity .25s ease;
+    filter: drop-shadow(0 0 12px rgba(255,0,0,0.85));
+  }
+  .neon {
+    color:var(--red);
+    margin:6px 0;
+    line-height:1.05;
+    text-shadow:
+      0 0 6px rgba(255,30,30,0.95),
+      0 0 18px rgba(255,40,40,0.85),
+      0 0 32px rgba(255,80,80,0.5),
+      0 4px 6px rgba(0,0,0,0.6);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  h1.neon { font-size:2.4rem; margin-top:8px; letter-spacing:1px; }
+  h2.neon { font-size:1.6rem; margin:6px 0; opacity:0.95; }
+  p.neon-small { font-size:1rem; margin:6px 0 0; opacity:0.95; }
+  .partner {
+    display:inline-block;
+    margin-top:8px;
+    font-size:0.95rem;
+    text-decoration:none;
+    color:var(--red);
+    padding:4px 8px;
+    border-radius:6px;
+    text-shadow: var(--text-shadow-1), var(--text-shadow-2);
+    transition: transform .12s ease;
+  }
+  .partner:hover { transform: translateY(-3px); }
+  @keyframes flickerText {
+    0%   { opacity:1; filter:brightness(1); text-shadow: var(--text-shadow-1), var(--text-shadow-2), var(--text-shadow-3); }
+    3%   { opacity:.15; filter:brightness(.2); text-shadow:none; }
+    6%   { opacity:1; filter:brightness(1); text-shadow: var(--text-shadow-1), var(--text-shadow-2), var(--text-shadow-3); }
+    8%   { opacity:.05; filter:brightness(.05); text-shadow:none; }
+    11%  { opacity:1; filter:brightness(1); text-shadow: var(--text-shadow-1), var(--text-shadow-2), var(--text-shadow-3); }
+    100% { opacity:1; filter:brightness(1); text-shadow: var(--text-shadow-1), var(--text-shadow-2), var(--text-shadow-3); }
+  }
+  @keyframes flickerLogo {
+    0% { opacity:1; transform: scale(1); filter: drop-shadow(0 0 12px rgba(255,0,0,0.85)); }
+    4% { opacity:.1; transform: scale(.98); filter: none; }
+    7% { opacity:1; transform: scale(1); filter: drop-shadow(0 0 12px rgba(255,0,0,0.85)); }
+    100% { opacity:1; transform: scale(1); filter: drop-shadow(0 0 12px rgba(255,0,0,0.85)); }
+  }
+  body.flicker .neon,
+  body.flicker .partner {
+    animation: flickerText 3.6s infinite;
+  }
+  body.flicker .logo {
+    animation: flickerLogo 3.6s infinite;
+  }
+  .blackout {
+    position:fixed;
+    left:0; right:0; top:0; bottom:0;
+    background:#000;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .2s ease;
+    z-index:80;
+  }
+  .blackout.on { opacity:1; transition:opacity .05s ease; }
+  .hint {
+    font-size:0.8rem;
+    color:#bbb;
+    margin-top:14px;
+    opacity:0.28;
+    text-shadow:none;
+  }
+  @media (max-width:520px){
+    .logo { width:86vw; }
+    h1.neon { font-size:2rem; }
+    h2.neon { font-size:1.1rem; }
+  }
 </style>
 </head>
-<body onclick="playAudio();">
-<div class="center">
-<div class="banner">
-<img src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/m9RCVr.png" alt="resim" />
-</div>
-
-<p>
-<img src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/jj1jmD.gif" width="300" height="23" style="margin-left:0px;" />
-</p>
-
-<h1 style="font-family: 'Iceland', serif; font-size: 2.5rem; color: #fff; margin: .2rem 0;">Hacked by</h1>
-<h2 style="font-family: 'Iceland', serif; font-size: 2.5rem; color: red; margin: .2rem 0;"><b>By_pulsar, ArchieNNN, C4K1R</b></h2>
-
-<p>
-<img src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/jj1jmD.gif" width="300" height="23" style="margin-left:0px;" />
-</p>
-
-<p style="font-family: 'Iceland', serif; font-size: 1.25rem; color: #fff;">
-Istedigimiz Zaman, Istedigimiz Yerde.!
-</p>
-
-<p>
-<a style="text-decoration:none;" target="_blank" href="https://turkhackteam.org/" rel="noopener noreferrer">
-<span style="font-family: 'Iceland', serif; font-size: 1.25rem; color: red;">[ Turkhackteam.org ]</span>
-</a>
-</p>
-
-<!-- Audio (plays when the user clicks anywhere on the page) -->
-<audio id="sec">
-<source src="https://cdn.discordapp.com/attachments/1025874740847575164/1025875083190874212/mt-hani-gokboru-beat.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
-
-<script>
-var x = document.getElementById("sec");
-function playAudio() {
-if (x && x.paused) {
-x.play().catch(function(e) { console.warn('Autoplay prevented:', e); });
-}
-}
-</script>
-
-<!-- Footer removed as requested (handles moved into the main heading) -->
-</div>
+<body onclick="playAudio();" class="flicker">
+  <div class="wrap">
+    <div class="logo-wrap">
+      <img class="logo" src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/m9RCVr.png" alt="logo" />
+    </div>
+    <h1 class="neon">Hello Admin!</h1>
+    <h2 class="neon"><b>Anka Red Team Was Here :)</b></h2>
+    <p class="neon-small">
+      <a class="partner" href="https://turkhackteam.org/" target="_blank" rel="noopener noreferrer">[ Turkhackteam.org ]</a>
+    </p>
+    <p class="hint">Sayfaya tıklayın — ses çalacak. Elektrik kesintisi efekti rastgele tetiklenir.</p>
+  </div>
+  <div id="blackout" class="blackout"></div>
+  <audio id="sec">
+    <source src="https://cdn.discordapp.com/attachments/1025874740847575164/1025875083190874212/mt-hani-gokboru-beat.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+    var x = document.getElementById("sec");
+    function playAudio(){
+      if (x && x.paused) {
+        x.play().catch(function(e){ console.warn('Autoplay prevented:', e); });
+      }
+    }
+    (function(){
+      var body = document.body;
+      var blackout = document.getElementById('blackout');
+      body.classList.add('flicker');
+      function maybeBlackout(){
+        if (Math.random() < 0.20) {
+          var dur = 400 + Math.random() * 1800;
+          blackout.classList.add('on');
+          body.classList.remove('flicker');
+          setTimeout(function(){
+            blackout.classList.remove('on');
+            setTimeout(function(){ body.classList.add('flicker'); }, 80 + Math.random()*220);
+          }, dur);
+        }
+        var next = 2000 + Math.random()*6000;
+        setTimeout(maybeBlackout, next);
+      }
+      setTimeout(maybeBlackout, 1800 + Math.random()*1200);
+      document.addEventListener('visibilitychange', function(){
+        if (document.hidden) {
+          body.classList.remove('flicker');
+          blackout.classList.remove('on');
+        } else {
+          body.classList.add('flicker');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
