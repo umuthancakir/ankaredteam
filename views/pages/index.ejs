@@ -35,7 +35,7 @@
     filter:blur(2px);
   }
   .logo{
-    display:block;width:360px;max-width:82vw;height:auto;border-radius:6px;
+    display:block;width:260px;max-width:75vw;height:auto;border-radius:6px;
     box-shadow:0 10px 30px rgba(0,0,0,0.8);
     filter:drop-shadow(0 0 10px rgba(255,0,0,0.85));
   }
@@ -44,8 +44,8 @@
     margin:6px 0;line-height:1.05;
     text-shadow:0 0 8px rgba(255,30,30,0.95),0 0 22px rgba(255,40,40,0.85),0 0 40px rgba(255,80,80,0.5);
   }
-  h1.neon{font-size:2.8rem;margin-top:8px;}
-  h2.neon{font-size:2rem;margin:6px 0;}
+  h1.neon{font-size:3rem;margin-top:8px;}
+  h2.neon{font-size:4rem;margin:6px 0;}
   p.neon-small{font-size:1.2rem;margin:6px 0 0;}
   .partner{
     display:inline-block;margin-top:8px;font-size:1.1rem;
@@ -53,35 +53,32 @@
     text-shadow:var(--text-shadow-1),var(--text-shadow-2);
   }
   @keyframes flickerText{
-    0%,100%{opacity:1;filter:brightness(1);text-shadow:var(--text-shadow-1),var(--text-shadow-2),var(--text-shadow-3);}
-    3%{opacity:.2;filter:brightness(.3);text-shadow:none;}
-    6%{opacity:1;}
-    9%{opacity:.1;}
+    0%{opacity:1;filter:brightness(1);text-shadow:var(--text-shadow-1),var(--text-shadow-2),var(--text-shadow-3);}
+    6%{opacity:.06;filter:brightness(.05);text-shadow:none;}
+    10%{opacity:1;}
+    50%{opacity:1;}
+    56%{opacity:.08;filter:brightness(.06);text-shadow:none;}
+    60%{opacity:1;}
+    100%{opacity:1;}
   }
-  @keyframes flickerLogo{
-    0%,100%{opacity:1;transform:scale(1);}
-    5%{opacity:.1;transform:scale(.98);}
-    8%{opacity:1;transform:scale(1);}
-  }
-  body.flicker .neon,body.flicker .partner{animation:flickerText 2.6s infinite;}
-  body.flicker .logo{animation:flickerLogo 2.6s infinite;}
+  body.flicker .neon,body.flicker .partner{animation:flickerText 1.2s infinite;}
   .blackout{
     position:fixed;left:0;right:0;top:0;bottom:0;background:#000;
-    pointer-events:none;opacity:0;transition:opacity .15s ease;z-index:80;
+    pointer-events:none;opacity:0;transition:opacity .05s linear;z-index:80;
   }
-  .blackout.on{opacity:1;transition:opacity .05s ease;}
+  .blackout.on{opacity:1;}
   .hint{font-size:.8rem;color:#bbb;margin-top:14px;opacity:.28;text-shadow:none;}
   @media(max-width:520px){
-    .logo{width:80vw;}
+    .logo{width:70vw;}
     h1.neon{font-size:2.2rem;}
-    h2.neon{font-size:1.6rem;}
+    h2.neon{font-size:2.8rem;}
   }
 </style>
 </head>
 <body onclick="playAudio();" class="flicker">
   <div class="wrap">
     <div class="logo-wrap">
-      <img class="logo" src="http://zonehmirrors.org/defaced/2021/01/27/wothoq.co/i.hizliresim.com/m9RCVr.png" alt="logo" />
+      <img class="logo" src="https://hizliresim.com/8cndvl5" alt="logo" />
     </div>
     <h1 class="neon">Hello Admin!</h1>
     <h2 class="neon"><b>Anka Red Team Was Here :)</b></h2>
@@ -103,19 +100,23 @@
       var body=document.body,blackout=document.getElementById('blackout');
       body.classList.add('flicker');
       function maybeBlackout(){
-        if(Math.random()<0.25){
-          var dur=200+Math.random()*900;
+        if(Math.random()<0.5){
+          var dur=30+Math.random()*180;
           blackout.classList.add('on');
           body.classList.remove('flicker');
           setTimeout(function(){
             blackout.classList.remove('on');
-            setTimeout(function(){body.classList.add('flicker');},50+Math.random()*120);
+            setTimeout(function(){body.classList.add('flicker');},20+Math.random()*80);
           },dur);
         }
-        var next=1000+Math.random()*3000;
+        var next=400+Math.random()*1200;
         setTimeout(maybeBlackout,next);
       }
-      setTimeout(maybeBlackout,1200+Math.random()*800);
+      setTimeout(maybeBlackout,400+Math.random()*400);
+      document.addEventListener('visibilitychange',function(){
+        if(document.hidden){body.classList.remove('flicker');blackout.classList.remove('on');}
+        else{body.classList.add('flicker');}
+      });
     })();
   </script>
 </body>
