@@ -8,114 +8,144 @@
 <style>
   :root{
     --red:#ff1a1a;
-    --text-shadow-1:0 0 6px rgba(255,20,20,0.9);
-    --text-shadow-2:0 0 18px rgba(255,30,30,0.7);
-    --text-shadow-3:0 0 36px rgba(255,50,50,0.45);
+    --ts1:0 0 6px rgba(255,20,20,0.9);
+    --ts2:0 0 18px rgba(255,30,30,0.7);
+    --ts3:0 0 36px rgba(255,50,50,0.45);
   }
   html,body{
-    height:100%;margin:0;
+    height:100%;
+    margin:0;
     background:radial-gradient(ellipse at center,#050505 0%,#000 60%);
-    color:#fff;font-family:'Iceland',sans-serif;
+    color:#fff;
+    font-family:'Iceland',sans-serif;
     overflow-x:hidden;
   }
   .wrap{
     min-height:100%;
-    display:flex;align-items:center;justify-content:center;
-    flex-direction:column;text-align:center;
-    padding:40px 20px;box-sizing:border-box;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    padding:36px 20px;
+    box-sizing:border-box;
   }
   .logo-wrap{
-    position:relative;display:inline-block;
-    padding:16px;border-radius:18px;margin-bottom:12px;
+    position:relative;
+    display:inline-block;
+    padding:12px;
+    border-radius:14px;
+    margin-bottom:10px;
   }
   .logo-wrap::before{
-    content:"";position:absolute;left:-8px;right:-8px;top:-8px;bottom:-8px;
-    border-radius:22px;pointer-events:none;z-index:-1;
-    box-shadow:0 0 12px rgba(255,0,0,0.9),0 0 30px rgba(255,20,20,0.6),0 0 60px rgba(255,40,40,0.35);
+    content:"";
+    position:absolute;
+    left:-8px; right:-8px; top:-8px; bottom:-8px;
+    border-radius:18px;
+    pointer-events:none;
+    z-index:-1;
+    box-shadow:
+      0 0 12px rgba(255,0,0,0.9),
+      0 0 28px rgba(255,20,20,0.6),
+      0 0 50px rgba(255,40,40,0.33);
     filter:blur(2px);
   }
   .logo{
-    display:block;width:260px;max-width:75vw;height:auto;border-radius:6px;
+    display:block;
+    width:240px;
+    max-width:72vw;
+    height:auto;
+    border-radius:6px;
     box-shadow:0 10px 30px rgba(0,0,0,0.8);
     filter:drop-shadow(0 0 10px rgba(255,0,0,0.85));
   }
   .neon{
     color:var(--red);
-    margin:6px 0;line-height:1.05;
-    text-shadow:0 0 8px rgba(255,30,30,0.95),0 0 22px rgba(255,40,40,0.85),0 0 40px rgba(255,80,80,0.5);
+    margin:6px 0;
+    line-height:1.02;
+    text-shadow:
+      0 0 10px rgba(255,30,30,0.95),
+      0 0 26px rgba(255,40,40,0.85),
+      0 0 48px rgba(255,80,80,0.45);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
   }
-  h1.neon{font-size:3rem;margin-top:8px;}
-  h2.neon{font-size:4rem;margin:6px 0;}
-  p.neon-small{font-size:1.2rem;margin:6px 0 0;}
+  h1.neon{font-size:3.4rem;margin-top:10px;letter-spacing:.6px;}
+  h2.neon{font-size:5rem;margin:8px 0;line-height:0.95;}
+  p.neon-small{font-size:1.3rem;margin:6px 0 0;}
   .partner{
-    display:inline-block;margin-top:8px;font-size:1.1rem;
+    display:inline-block;margin-top:10px;font-size:1.15rem;
     text-decoration:none;color:var(--red);
-    text-shadow:var(--text-shadow-1),var(--text-shadow-2);
+    text-shadow:var(--ts1),var(--ts2);
   }
-  @keyframes flickerText{
-    0%{opacity:1;filter:brightness(1);text-shadow:var(--text-shadow-1),var(--text-shadow-2),var(--text-shadow-3);}
-    6%{opacity:.06;filter:brightness(.05);text-shadow:none;}
-    10%{opacity:1;}
-    50%{opacity:1;}
-    56%{opacity:.08;filter:brightness(.06);text-shadow:none;}
-    60%{opacity:1;}
-    100%{opacity:1;}
+
+  @keyframes subtleFlicker {
+    0%   { opacity:1; filter:brightness(1); text-shadow:var(--ts1),var(--ts2),var(--ts3); }
+    4%   { opacity:0.7; filter:brightness(0.8); text-shadow:0 0 6px rgba(255,10,10,0.45); }
+    8%   { opacity:0.95; filter:brightness(0.95); }
+    20%  { opacity:1; }
+    100% { opacity:1; }
   }
-  body.flicker .neon,body.flicker .partner{animation:flickerText 1.2s infinite;}
+
+  body.flicker .neon,
+  body.flicker .partner {
+    animation: subtleFlicker 1.6s infinite;
+    animation-timing-function: linear;
+  }
+
   .blackout{
     position:fixed;left:0;right:0;top:0;bottom:0;background:#000;
-    pointer-events:none;opacity:0;transition:opacity .05s linear;z-index:80;
+    pointer-events:none;opacity:0;transition:opacity .02s linear;z-index:80;
   }
   .blackout.on{opacity:1;}
-  .hint{font-size:.8rem;color:#bbb;margin-top:14px;opacity:.28;text-shadow:none;}
+
   @media(max-width:520px){
-    .logo{width:70vw;}
-    h1.neon{font-size:2.2rem;}
-    h2.neon{font-size:2.8rem;}
+    .logo{width:66vw;}
+    h1.neon{font-size:2.4rem;}
+    h2.neon{font-size:3rem;}
+    p.neon-small{font-size:1rem;}
   }
 </style>
 </head>
-<body onclick="playAudio();" class="flicker">
+<body class="flicker">
   <div class="wrap">
     <div class="logo-wrap">
-      <img class="logo" src="https://hizliresim.com/8cndvl5" alt="logo" />
+      <img class="logo" src="https://i.hizliresim.com/8cndvl5.png" alt="logo" />
     </div>
     <h1 class="neon">Hello Admin!</h1>
     <h2 class="neon"><b>Anka Red Team Was Here :)</b></h2>
     <p class="neon-small">
       <a class="partner" href="https://turkhackteam.org/" target="_blank" rel="noopener noreferrer">[ Turkhackteam.org ]</a>
     </p>
-    <p class="hint">Sayfaya tıklayın — ses çalacak.</p>
   </div>
+
   <div id="blackout" class="blackout"></div>
-  <audio id="sec">
+
+  <audio id="sec" style="display:none">
     <source src="https://cdn.discordapp.com/attachments/1025874740847575164/1025875083190874212/mt-hani-gokboru-beat.mp3" type="audio/mpeg">
   </audio>
+
   <script>
-    var x=document.getElementById("sec");
-    function playAudio(){
-      if(x&&x.paused){x.play().catch(()=>{});}
-    }
     (function(){
-      var body=document.body,blackout=document.getElementById('blackout');
-      body.classList.add('flicker');
+      var blackout = document.getElementById('blackout');
+      var body = document.body;
       function maybeBlackout(){
-        if(Math.random()<0.5){
-          var dur=30+Math.random()*180;
+        if(Math.random() < 0.12){
+          var dur = 20 + Math.random()*120; // çok kısa, anlık hissi
           blackout.classList.add('on');
           body.classList.remove('flicker');
           setTimeout(function(){
             blackout.classList.remove('on');
-            setTimeout(function(){body.classList.add('flicker');},20+Math.random()*80);
-          },dur);
+            setTimeout(function(){ body.classList.add('flicker'); }, 10 + Math.random()*60);
+          }, dur);
         }
-        var next=400+Math.random()*1200;
-        setTimeout(maybeBlackout,next);
+        var next = 600 + Math.random()*1400; // daha sık ama rastgele
+        setTimeout(maybeBlackout, next);
       }
-      setTimeout(maybeBlackout,400+Math.random()*400);
-      document.addEventListener('visibilitychange',function(){
-        if(document.hidden){body.classList.remove('flicker');blackout.classList.remove('on');}
-        else{body.classList.add('flicker');}
+      setTimeout(maybeBlackout, 500 + Math.random()*700);
+      document.addEventListener('visibilitychange', function(){
+        if(document.hidden){ body.classList.remove('flicker'); blackout.classList.remove('on'); }
+        else { body.classList.add('flicker'); }
       });
     })();
   </script>
