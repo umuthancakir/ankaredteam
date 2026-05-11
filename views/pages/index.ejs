@@ -1,153 +1,60 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Hacked By TurkHackTeam | Anka Red Team</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Iceland">
-<style>
-  :root{
-    --red:#ff1a1a;
-    --ts1:0 0 6px rgba(255,20,20,0.9);
-    --ts2:0 0 18px rgba(255,30,30,0.7);
-    --ts3:0 0 36px rgba(255,50,50,0.45);
-  }
-  html,body{
-    height:100%;
-    margin:0;
-    background:radial-gradient(ellipse at center,#050505 0%,#000 60%);
-    color:#fff;
-    font-family:'Iceland',sans-serif;
-    overflow-x:hidden;
-  }
-  .wrap{
-    min-height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    text-align:center;
-    padding:36px 20px;
-    box-sizing:border-box;
-  }
-  .logo-wrap{
-    position:relative;
-    display:inline-block;
-    padding:12px;
-    border-radius:14px;
-    margin-bottom:10px;
-  }
-  .logo-wrap::before{
-    content:"";
-    position:absolute;
-    left:-8px; right:-8px; top:-8px; bottom:-8px;
-    border-radius:18px;
-    pointer-events:none;
-    z-index:-1;
-    box-shadow:
-      0 0 12px rgba(255,0,0,0.9),
-      0 0 28px rgba(255,20,20,0.6),
-      0 0 50px rgba(255,40,40,0.33);
-    filter:blur(2px);
-  }
-  .logo{
-    display:block;
-    width:240px;
-    max-width:72vw;
-    height:auto;
-    border-radius:6px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.8);
-    filter:drop-shadow(0 0 10px rgba(255,0,0,0.85));
-  }
-  .neon{
-    color:var(--red);
-    margin:6px 0;
-    line-height:1.02;
-    text-shadow:
-      0 0 10px rgba(255,30,30,0.95),
-      0 0 26px rgba(255,40,40,0.85),
-      0 0 48px rgba(255,80,80,0.45);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-  }
-  h1.neon{font-size:3.4rem;margin-top:10px;letter-spacing:.6px;}
-  h2.neon{font-size:5rem;margin:8px 0;line-height:0.95;}
-  p.neon-small{font-size:1.3rem;margin:6px 0 0;}
-  .partner{
-    display:inline-block;margin-top:10px;font-size:1.15rem;
-    text-decoration:none;color:var(--red);
-    text-shadow:var(--ts1),var(--ts2);
-  }
-
-  @keyframes subtleFlicker {
-    0%   { opacity:1; filter:brightness(1); text-shadow:var(--ts1),var(--ts2),var(--ts3); }
-    4%   { opacity:0.7; filter:brightness(0.8); text-shadow:0 0 6px rgba(255,10,10,0.45); }
-    8%   { opacity:0.95; filter:brightness(0.95); }
-    20%  { opacity:1; }
-    100% { opacity:1; }
-  }
-
-  body.flicker .neon,
-  body.flicker .partner {
-    animation: subtleFlicker 1.6s infinite;
-    animation-timing-function: linear;
-  }
-
-  .blackout{
-    position:fixed;left:0;right:0;top:0;bottom:0;background:#000;
-    pointer-events:none;opacity:0;transition:opacity .02s linear;z-index:80;
-  }
-  .blackout.on{opacity:1;}
-
-  @media(max-width:520px){
-    .logo{width:66vw;}
-    h1.neon{font-size:2.4rem;}
-    h2.neon{font-size:3rem;}
-    p.neon-small{font-size:1rem;}
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="referrer" content="no-referrer">
+    <title>Hacked By TurkHackTeam | Saldırı Timleri</title>
+    <link rel="icon" type="image/png" href="https://i.hizliresim.com/9x1hxd2.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <audio id="bgMusic" loop><source src="https://audio.jukehost.co.uk/qYt25nLPy1TFv3szkZ3MdpXu5FybjiNJ.mp3" type="audio/mpeg"></audio>
+    <script>
+    document.addEventListener("click", () => { const audio = document.getElementById("bgMusic"); audio.play(); }, { once: true });
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { height: 100%; background-color: #050505; color: #ffffff; font-family: 'Rajdhani', sans-serif; overflow: hidden; user-select: none; cursor: crosshair; }
+        .bg-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 1; opacity: 0; transform: scale(1.1); transition: transform 0.1s linear; }
+        .bg-1 { background-image: url('https://i.hizliresim.com/hzquks5.png'); animation: fadeBg1 32s infinite; }
+        .bg-2 { background-image: url('https://i.hizliresim.com/gOlzj2.png'); animation: fadeBg2 32s infinite; }
+        .bg-3 { background-image: url('https://i.hizliresim.com/segn1lt.png'); animation: fadeBg3 32s infinite; }
+        .bg-4 { background-image: url('https://i.hizliresim.com/32f7w9r.png'); animation: fadeBg4 32s infinite; }
+        #networkCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; }
+        .vignette-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, transparent 15%, #000000 100%); z-index: 3; pointer-events: none; }
+        .container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; text-align: center; position: relative; padding: 20px; pointer-events: none; z-index: 4; }
+        .logos-container { display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 40px; pointer-events: auto; text-decoration: none; cursor: pointer; }
+        .logos-container img { width: 200px; filter: drop-shadow(0 0 15px rgba(255, 0, 0, 0.6)); animation: breathe 4s ease-in-out infinite alternate; }
+        .slider-container { position: relative; width: 100%; max-width: 1000px; height: 150px; display: flex; justify-content: center; align-items: center; }
+        .slide { position: absolute; opacity: 0; transform: scale(0.95); transition: opacity 1.2s ease, transform 1.2s ease; filter: blur(5px); font-family: 'Orbitron', sans-serif; font-size: 2.2rem; width: 100%; }
+        .slide.active { opacity: 1; transform: scale(1); filter: blur(0); }
+        .slide span { color: #ff0000; font-weight: 900; }
+        @keyframes fadeBg1 { 0%, 20% { opacity: 0.45; } 25%, 95% { opacity: 0; } 100% { opacity: 0.45; } }
+        @keyframes fadeBg2 { 0%, 20% { opacity: 0; } 25%, 45% { opacity: 0.45; } 50%, 100% { opacity: 0; } }
+        @keyframes fadeBg3 { 0%, 45% { opacity: 0; } 50%, 70% { opacity: 0.45; } 75%, 100% { opacity: 0; } }
+        @keyframes fadeBg4 { 0%, 70% { opacity: 0; } 75%, 95% { opacity: 0.45; } 100% { opacity: 0; } }
+        @keyframes breathe { 0% { transform: scale(0.97); } 100% { transform: scale(1.03); } }
+    </style>
 </head>
-<body class="flicker">
-  <div class="wrap">
-    <div class="logo-wrap">
-      <img class="logo" src="https://i.hizliresim.com/8cndvl5.png" alt="logo" />
+<body>
+    <div class="bg-layer bg-1"></div><div class="bg-layer bg-2"></div><div class="bg-layer bg-3"></div><div class="bg-layer bg-4"></div>
+    <canvas id="networkCanvas"></canvas>
+    <div class="vignette-overlay"></div>
+    <div class="container">
+        <a href="https://www.turkhackteam.org/" target="_blank" class="logos-container"><img src="https://i.hizliresim.com/2072tdy.png"></a>
+        <div class="slider-container">
+            <div class="slide active">HELLO ADMIN SYSTEM HACKED!<br><span>TURKHACKTEAM</span></div>
+            <div class="slide">TURKISH HACKERS <br><span>HERE!</span></div>
+            <div class="slide">İSTEDİĞİMİZ ZAMAN<br><span>İSTEDİĞİMİZ YERDE!</span></div>
+        </div>
     </div>
-    <h1 class="neon">Hello Admin!</h1>
-    <h2 class="neon"><b>Anka Red Team Was Here :)</b></h2>
-    <p class="neon-small">
-      <a class="partner" href="https://turkhackteam.org/" target="_blank" rel="noopener noreferrer">[ Turkhackteam.org ]</a>
-    </p>
-  </div>
-
-  <div id="blackout" class="blackout"></div>
-
-  <audio id="sec" style="display:none">
-    <source src="https://cdn.discordapp.com/attachments/1025874740847575164/1025875083190874212/mt-hani-gokboru-beat.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    (function(){
-      var blackout = document.getElementById('blackout');
-      var body = document.body;
-      function maybeBlackout(){
-        if(Math.random() < 0.12){
-          var dur = 20 + Math.random()*120; // çok kısa, anlık hissi
-          blackout.classList.add('on');
-          body.classList.remove('flicker');
-          setTimeout(function(){
-            blackout.classList.remove('on');
-            setTimeout(function(){ body.classList.add('flicker'); }, 10 + Math.random()*60);
-          }, dur);
-        }
-        var next = 600 + Math.random()*1400; // daha sık ama rastgele
-        setTimeout(maybeBlackout, next);
-      }
-      setTimeout(maybeBlackout, 500 + Math.random()*700);
-      document.addEventListener('visibilitychange', function(){
-        if(document.hidden){ body.classList.remove('flicker'); blackout.classList.remove('on'); }
-        else { body.classList.add('flicker'); }
-      });
-    })();
-  </script>
+    <script>
+        const canvas=document.getElementById('networkCanvas'); const ctx=canvas.getContext('2d');
+        canvas.width=window.innerWidth; canvas.height=window.innerHeight;
+        let p=[]; class Part { constructor(x,y,dx,dy){this.x=x;this.y=y;this.dx=dx;this.dy=dy;} draw(){ctx.beginPath();ctx.arc(this.x,this.y,1,0,Math.PI*2);ctx.fillStyle='red';ctx.fill();} update(){if(this.x>canvas.width||this.x<0)this.dx=-this.dx;if(this.y>canvas.height||this.y<0)this.dy=-this.dy;this.x+=this.dx;this.y+=this.dy;this.draw();}}
+        for(let i=0;i<80;i++){p.push(new Part(Math.random()*canvas.width,Math.random()*canvas.height,Math.random()*0.4-0.2,Math.random()*0.4-0.2));}
+        function anim(){ctx.clearRect(0,0,canvas.width,canvas.height);p.forEach(part=>part.update());requestAnimationFrame(anim);} anim();
+        const s=document.querySelectorAll('.slide'); let c=0; setInterval(()=>{s[c].classList.remove('active');c=(c+1)%s.length;s[c].classList.add('active');},4500);
+    </script>
 </body>
 </html>
